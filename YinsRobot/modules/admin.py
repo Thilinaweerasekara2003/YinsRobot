@@ -34,25 +34,25 @@ def set_sticker(update: Update, context: CallbackContext):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        return msg.reply_text("Anda kehilangan hak untuk mengubah info obrolan!")
+        return msg.reply_text("You lose the right to change chat info!")
 
     if msg.reply_to_message:
         if not msg.reply_to_message.sticker:
             return msg.reply_text(
-                "Anda perlu membalas beberapa stiker untuk mengatur set stiker obrolan!"
+                "You need to reply some stickers to set chat sticker set!"
             )
         stkr = msg.reply_to_message.sticker.set_name
         try:
             context.bot.set_chat_sticker_set(chat.id, stkr)
-            msg.reply_text(f"Berhasil mengatur stiker grup baru di {chat.title}!")
+            msg.reply_text(f"Successfully set new group sticker in {chat.title}!")
         except BadRequest as excp:
             if excp.message == "Participants_too_few":
                 return msg.reply_text(
-                    "Maaf, karena pembatasan telegram, obrolan harus memiliki minimal 100 anggota sebelum mereka dapat memiliki stiker grup!"
+                    "Sorry, due to telegram restrictions, chats must have a minimum of 100 members before they can have group stickers!"
                 )
-            msg.reply_text(f"Kesalahan! {excp.message}.")
+            msg.reply_text(f"Error! {excp.message}.")
     else:
-        msg.reply_text("Anda perlu membalas beberapa stiker untuk mengatur set stiker obrolan!")
+        msg.reply_text("You need to reply some stickers to set chat sticker set!")
        
     
 @bot_admin
@@ -63,7 +63,7 @@ def setchatpic(update: Update, context: CallbackContext):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        msg.reply_text("Anda kehilangan hak untuk mengubah info grup!")
+        msg.reply_text("You lose the right to change group info!")
         return
 
     if msg.reply_to_message:
@@ -72,23 +72,23 @@ def setchatpic(update: Update, context: CallbackContext):
         elif msg.reply_to_message.document:
             pic_id = msg.reply_to_message.document.file_id
         else:
-            msg.reply_text("Anda hanya dapat mengatur beberapa foto sebagai gambar obrolan!")
+            msg.reply_text("You can only set some photos as chat pictures!")
             return
-        dlmsg = msg.reply_text("Tunggu sebentar...")
+        dlmsg = msg.reply_text("Wait for a while...")
         tpic = context.bot.get_file(pic_id)
         tpic.download("gpic.png")
         try:
             with open("gpic.png", "rb") as chatp:
                 context.bot.set_chat_photo(int(chat.id), photo=chatp)
-                msg.reply_text("Berhasil mengatur chatpic baru!")
+                msg.reply_text("Successfully set up a new chatpic!")
         except BadRequest as excp:
-            msg.reply_text(f"Kesalahan! {excp.message}")
+            msg.reply_text(f"Error! {excp.message}")
         finally:
             dlmsg.delete()
             if os.path.isfile("gpic.png"):
                 os.remove("gpic.png")
     else:
-        msg.reply_text("Balas ke beberapa foto atau file untuk mengatur gambar obrolan baru!")
+        msg.reply_text("Reply to multiple photos or files to set a new chat image!")
         
 @bot_admin
 @user_admin
@@ -98,13 +98,13 @@ def rmchatpic(update: Update, context: CallbackContext):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        msg.reply_text("Anda tidak memiliki cukup hak untuk menghapus foto grup")
+        msg.reply_text("You do not have enough rights to delete the group photo")
         return
     try:
         context.bot.delete_chat_photo(int(chat.id))
-        msg.reply_text("Berhasil menghapus foto profil obrolan!")
+        msg.reply_text("Successfully deleted chat profile photo!")
     except BadRequest as excp:
-        msg.reply_text(f"Kesalahan! {excp.message}.")
+        msg.reply_text(f"Error! {excp.message}.")
         return
     
 @bot_admin
@@ -115,20 +115,20 @@ def set_desc(update: Update, context: CallbackContext):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        return msg.reply_text("Anda kehilangan hak untuk mengubah info obrolan!")
+        return msg.reply_text("You lose the right to change chat info!")
 
     tesc = msg.text.split(None, 1)
     if len(tesc) >= 2:
         desc = tesc[1]
     else:
-        return msg.reply_text("Menyetel deskripsi kosong tidak akan menghasilkan apa-apa!")
+        return msg.reply_text("Setting an empty description will do nothing!")
     try:
         if len(desc) > 255:
-            return msg.reply_text("Deskripsi harus kurang dari 255 karakter!")
+            return msg.reply_text("Description must be less than 255 characters!")
         context.bot.set_chat_description(chat.id, desc)
-        msg.reply_text(f"Berhasil memperbarui deskripsi obrolan di {chat.title}!")
+        msg.reply_text(f"Successfully updated chat description on {chat.title}!")
     except BadRequest as excp:
-        msg.reply_text(f"Kesalahan! {excp.message}.")        
+        msg.reply_text(f"Error! {excp.message}.")        
         
 @bot_admin
 @user_admin
@@ -139,22 +139,22 @@ def setchat_title(update: Update, context: CallbackContext):
     args = context.args
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        msg.reply_text("Anda tidak memiliki cukup hak untuk mengubah info obrolan!")
+        msg.reply_text("You don't have enough rights to change chat info!")
         return
 
     title = " ".join(args)
     if not title:
-        msg.reply_text("Masukkan beberapa teks untuk menetapkan judul baru di obrolan Anda!")
+        msg.reply_text("Enter some text to set a new title in your chat!")
         return
 
     try:
         context.bot.set_chat_title(int(chat.id), str(title))
         msg.reply_text(
-            f"Berhasil mengatur <b>{title}</b> sebagai judul obrolan baru!",
+            f"Managed successfully <b>{title}</b> as new chat title!",
             parse_mode=ParseMode.HTML,
         )
     except BadRequest as excp:
-        msg.reply_text(f"Kesalahan! {excp.message}.")
+        msg.reply_text(f"Error! {excp.message}.")
         return
         
         
@@ -177,14 +177,14 @@ def promote(update: Update, context: CallbackContext) -> str:
         not (promoter.can_promote_members or promoter.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("Anda tidak memiliki hak yang diperlukan untuk melakukan itu!")
+        message.reply_text("You don't have the necessary rights to do that!")
         return
 
     user_id = extract_user(message, args)
 
     if not user_id:
         message.reply_text(
-            "Anda sepertinya tidak merujuk ke pengguna atau ID yang ditentukan salah...",
+            "You don't seem to be referring to the wrong user or ID specified...",
         )
         return
 
@@ -193,12 +193,12 @@ def promote(update: Update, context: CallbackContext) -> str:
     except:
         return
 
-    if user_member.status in ('administrator', 'creator'):
-        message.reply_text("Bagaimana cara saya mempromosikan seseorang yang sudah menjadi admin?")
+    if user_member.status in ('Administrator', 'creator'):
+        message.reply_text("How do I promote someone who is already an admin?")
         return
 
     if user_id == bot.id:
-        message.reply_text("Saya tidak bisa mempromosikan diri saya sendiri! Dapatkan admin untuk melakukannya untuk saya.")
+        message.reply_text("I can't promote myself! Get admin to do it for me.")
         return
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -219,14 +219,14 @@ def promote(update: Update, context: CallbackContext) -> str:
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("Saya tidak dapat mempromosikan seseorang yang tidak ada dalam grup.")
+            message.reply_text("I can't promote someone who's not in the group.")
         else:
-            message.reply_text("Terjadi kesalahan saat mempromosikan.")
+            message.reply_text("An error occurred while promoting.")
         return
 
     bot.sendMessage(
         chat.id,
-        f"Mempromosikan pengguna di <b>{chat.title}</b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}",
+        f"Promote users on <b>{chat.title}</b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}",
         parse_mode=ParseMode.HTML,
     )
 
@@ -259,14 +259,14 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
         not (promoter.can_promote_members or promoter.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("Anda tidak memiliki hak yang diperlukan untuk melakukan itu!")
+        message.reply_text("You don't have the necessary rights to do that!")
         return
 
     user_id = extract_user(message, args)
 
     if not user_id:
         message.reply_text(
-            "Anda sepertinya tidak merujuk ke pengguna atau ID yang ditentukan salah...",
+            "You don't seem to be referring to the wrong user or ID specified...",
         )
         return
 
@@ -275,12 +275,12 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
     except:
         return
 
-    if user_member.status in ('administrator', 'creator'):
-        message.reply_text("Bagaimana cara saya mempromosikan seseorang yang sudah menjadi admin?")
+    if user_member.status in ('Administrator', 'creator'):
+        message.reply_text("How do I promote someone who is already an admin?")
         return
 
     if user_id == bot.id:
-        message.reply_text("Saya tidak bisa mempromosikan diri saya sendiri! Dapatkan admin untuk melakukannya untuk saya.")
+        message.reply_text("I can't promote myself! Get admin to do it for me.")
         return
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -296,14 +296,14 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("Saya tidak dapat mempromosikan seseorang yang tidak ada dalam grup.")
+            message.reply_text("I can't promote someone who's not in the group.")
         else:
-            message.reply_text("Terjadi kesalahan saat mempromosikan.")
+            message.reply_text("An error occurred while promoting.")
         return
 
     bot.sendMessage(
         chat.id,
-        f"Mempromosikan pengguna dengan rendah di <b>{chat.title}<b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}",
+        f"Promote users low on <b>{chat.title}<b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}",
         parse_mode=ParseMode.HTML,
     )
 
@@ -336,14 +336,14 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
         not (promoter.can_promote_members or promoter.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("Anda tidak memiliki hak yang diperlukan untuk melakukan itu!")
+        message.reply_text("You don't have the necessary rights to do that!")
         return
 
     user_id = extract_user(message, args)
 
     if not user_id:
         message.reply_text(
-            "Anda sepertinya tidak merujuk ke pengguna atau ID yang ditentukan salah...",
+            "You don't seem to be referring to the wrong user or ID specified...",
         )
         return
 
@@ -352,12 +352,12 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
     except:
         return
 
-    if user_member.status in ('administrator', 'creator'):
-        message.reply_text("Bagaimana cara saya mempromosikan seseorang yang sudah menjadi admin?")
+    if user_member.status in ('Administrator', 'creator'):
+        message.reply_text("How do I promote someone who is already an admin?")
         return
 
     if user_id == bot.id:
-        message.reply_text("Saya tidak bisa mempromosikan diri saya sendiri! Dapatkan admin untuk melakukannya untuk saya.")
+        message.reply_text("I can't promote myself! Get admin to do it for me.")
         return
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -391,7 +391,7 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
 
     bot.sendMessage(
         chat.id,
-        f"Mempromosikan pengguna secara penuh di <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Promoter: {mention_html(user.id, user.first_name)}</b>",
+        f"Promote users in full at <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Promoter: {mention_html(user.id, user.first_name)}</b>",
         parse_mode=ParseMode.HTML,
     )
 
@@ -421,7 +421,7 @@ def demote(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     if not user_id:
         message.reply_text(
-            "Anda sepertinya tidak merujuk ke pengguna atau ID yang ditentukan salah..",
+            "You don't seem to be referring to the wrong user or ID specified..",
         )
         return
 
@@ -431,15 +431,15 @@ def demote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status == "creator":
-        message.reply_text("Orang ini MENCIPTAKAN obrolan, bagaimana saya menurunkannya?")
+        message.reply_text("This person CREATED the chat, how do I take it down?")
         return
 
     if not user_member.status == "administrator":
-        message.reply_text("Tidak dapat menurunkan apa yang tidak dipromosikan!")
+        message.reply_text("Can't take down what's not promoted!")
         return
 
     if user_id == bot.id:
-        message.reply_text("Saya tidak bisa menurunkan diri saya sendiri! Dapatkan admin untuk melakukannya untuk saya.")
+        message.reply_text("I can't lower myself! Get admin to do it for me.")
         return
 
     try:
@@ -459,7 +459,7 @@ def demote(update: Update, context: CallbackContext) -> str:
 
         bot.sendMessage(
             chat.id,
-            f"Berhasil menurunkan seorang admin di <b>{chat.title}</b>\n\nAdmin: <b>{mention_html(user_member.user.id, user_member.user.first_name)}</b>\nDemoter: {mention_html(user.id, user.first_name)}",
+            f"Managed to take down an admin on <b>{chat.title}</b>\n\nAdmin: <b>{mention_html(user_member.user.id, user_member.user.first_name)}</b>\nDemoter: {mention_html(user.id, user.first_name)}",
             parse_mode=ParseMode.HTML,
         )
 
@@ -473,8 +473,8 @@ def demote(update: Update, context: CallbackContext) -> str:
         return log_message
     except BadRequest:
         message.reply_text(
-            "Tidak dapat menurunkan. Saya mungkin bukan admin, atau status admin ditunjuk oleh orang lain"
-            " pengguna, jadi saya tidak bisa menindaklanjutinya!",
+            "Cannot lower. I may not be an admin, or the admin status was appointed by someone else"
+            "user, so I can't follow up on it!",
         )
         return
 
@@ -486,9 +486,9 @@ def refresh_admin(update, _):
     except KeyError:
         pass
 
-    xd = update.effective_message.reply_text("Sedang memperbarui daftar admin...")
+    xd = update.effective_message.reply_text("Currently updating admin list...")
     sleep(3)
-    xd.edit_text("✅ Daftar admin diperbarui!")
+    xd.edit_text("✅ Admin list updated!")
 
 
 @connection_status
@@ -510,48 +510,48 @@ def set_title(update: Update, context: CallbackContext):
 
     if not user_id:
         message.reply_text(
-            "Anda sepertinya tidak merujuk ke pengguna atau ID yang ditentukan salah..",
+            "You don't seem to be referring to the wrong user or ID specified..",
         )
         return
 
     if user_member.status == "creator":
         message.reply_text(
-            "Orang ini MENCIPTAKAN obrolan, bagaimana saya bisa mengatur judul khusus untuknya?",
+            "This guy CREATED a chat how can I set a custom title for him?",
         )
         return
 
     if user_member.status != "administrator":
         message.reply_text(
-            "Tidak dapat menyetel judul untuk bukan admin!\nPromosikan mereka terlebih dahulu untuk menetapkan judul khusus!",
+            "Cannot set title for non admin!\nPromote them first to set custom title!",
         )
         return
 
     if user_id == bot.id:
         message.reply_text(
-            "Saya tidak dapat menetapkan judul saya sendiri! Dapatkan orang yang menjadikan saya admin untuk melakukannya untuk saya.",
+            "I can't set my own title! Get the person who made me the admin to do it for me.",
         )
         return
 
     if not title:
-        message.reply_text("Mengatur judul kosong tidak melakukan apa-apa!")
+        message.reply_text("Setting empty title does nothing!")
         return
 
     if len(title) > 16:
         message.reply_text(
-            "Panjang judul lebih dari 16 karakter.\nMemotongnya menjadi 16 karakter.",
+            "The title is more than 16 characters long.\nCut it to 16 characters.",
         )
 
     try:
         bot.setChatAdministratorCustomTitle(chat.id, user_id, title)
     except BadRequest:
         message.reply_text(
-            "Entah mereka tidak dipromosikan oleh saya atau Anda menetapkan teks judul yang tidak mungkin untuk disetel."
+            "Either they are not promoted by me or you set the title text which is impossible to set."
         )
         return
 
     bot.sendMessage(
         chat.id,
-        f"Berhasil menetapkan judul untuk <code>{user_member.user.first_name or user_id}</code> "
+        f"Successfully set title for <code>{user_member.user.first_name or user_id}</code> "
         f"ke <code>{html.escape(title[:16])}</code>!",
         parse_mode=ParseMode.HTML,
     )
@@ -581,7 +581,7 @@ def pin(update: Update, context: CallbackContext) -> str:
     prev_message = update.effective_message.reply_to_message
 
     if prev_message is None:
-        msg.reply_text("Balas pesan untuk menyematkannya!")
+        msg.reply_text("Reply to a message to pin it!")
         return
 
     is_silent = True
@@ -598,12 +598,12 @@ def pin(update: Update, context: CallbackContext) -> str:
                 chat.id, prev_message.message_id, disable_notification=is_silent
             )
             msg.reply_text(
-                f"Saya telah menyematkan pesan.",
+                f"I have pinned a message.",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
-                                "•• Pergi ke pesan ••", url=f"{message_link}")
+                                "•• Go to message ••", url=f"{message_link}")
                         ]
                     ]
                 ), 
@@ -616,7 +616,7 @@ def pin(update: Update, context: CallbackContext) -> str:
 
         log_message = (
             f"<b>{html.escape(chat.title)}:</b>\n"
-            f"Pesan Berhasil Disematkan\n"
+            f"Message Pinned Successfully\n"
             f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}"
         )
 
@@ -638,7 +638,7 @@ def unpin(update: Update, context: CallbackContext):
         not (unpinner.can_pin_messages or unpinner.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("Anda tidak memiliki hak yang diperlukan untuk melakukan itu!")
+        message.reply_text("You don't have the necessary rights to do that!")
         return
 
     if msg.chat.username:
@@ -659,7 +659,7 @@ def unpin(update: Update, context: CallbackContext):
                 chat.id, prev_message.message_id
             )
             msg.reply_text(
-                f"Lepas pin <a href='{message_link}'>Pesan ini</a>.",
+                f"Release the pin <a href='{message_link}'>Message ini</a>.",
                 parse_mode=ParseMode.HTML,
                 disable_web_page_preview=True,
             )
@@ -671,7 +671,7 @@ def unpin(update: Update, context: CallbackContext):
         try:
             context.bot.unpinChatMessage(chat.id)
             msg.reply_text(
-                "Lepas pin pesan yang terakhir disematkan."
+                "Unpin the last pinned message."
             )
         except BadRequest as excp:
             if excp.message == "Message to unpin not found":
@@ -683,7 +683,7 @@ def unpin(update: Update, context: CallbackContext):
 
     log_message = (
         f"<b>{html.escape(chat.title)}:</b>\n"
-        f"Berhasil Melepas Pin\n"
+        f"Pin successfully removed\n"
         f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}"
     )
 
@@ -711,18 +711,18 @@ def pinned(update: Update, context: CallbackContext) -> str:
             message_link = f"https://t.me/c/{link_chat_id}/{pinned_id}"
 
         msg.reply_text(
-            f'📌 Disematkan di {html.escape(chat.title)}.',
+            f'📌 Pinned di {html.escape(chat.title)}.',
             reply_to_message_id=msg_id,
             parse_mode=ParseMode.HTML,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="•• Pergi ke pesan ••", url=f"https://t.me/{link_chat_id}/{pinned_id}")]]
+                [[InlineKeyboardButton(text="•• Go to message ••", url=f"https://t.me/{link_chat_id}/{pinned_id}")]]
             ),
         )
 
     else:
         msg.reply_text(
-            f"Tidak ada pesan yang disematkan di <b>{html.escape(chat.title)}!</b>",
+            f"No pinned messages <b>{html.escape(chat.title)}!</b>",
             parse_mode=ParseMode.HTML,
         )
 
@@ -743,11 +743,11 @@ def invite(update: Update, context: CallbackContext):
             update.effective_message.reply_text(invitelink)
         else:
             update.effective_message.reply_text(
-                "Saya tidak memiliki akses ke tautan undangan, coba ubah izin saya!",
+                "I don't have access to the invite link, try changing my permissions!",
             )
     else:
         update.effective_message.reply_text(
-            "Saya hanya bisa memberi Anda tautan undangan untuk grup dan channel, maaf!",
+            "I can only give you invite links for groups and channels, sorry!",
         )
 
 
@@ -768,18 +768,18 @@ def adminlist(update, context):
 
     try:
         msg = update.effective_message.reply_text(
-            "Mengambil admin grup...",
+            "Fetching admin group...",
             parse_mode=ParseMode.HTML,
         )
     except BadRequest:
         msg = update.effective_message.reply_text(
-            "Mengambil admin grup...",
+            "Taking group admin...",
             quote=False,
             parse_mode=ParseMode.HTML,
         )
 
     administrators = bot.getChatAdministrators(chat_id)
-    text = "Admin di <b>{}</b>:".format(html.escape(update.effective_chat.title))
+    text = "Admin at <b>{}</b>:".format(html.escape(update.effective_chat.title))
 
     for admin in administrators:
         user = admin.user
@@ -917,7 +917,7 @@ def button(update: Update, context: CallbackContext) -> str:
                 )
     else:
         update.effective_message.edit_text(
-            "Pengguna ini tidak dipromosikan atau telah meninggalkan grup!"
+            "This user was not promoted or has left the group!"
         )
         return ""
 
