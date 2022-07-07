@@ -103,7 +103,7 @@ buttons = [
     ],
     [
         InlineKeyboardButton(
-            text="➗ Add Yins To Your Group ➗", url=f"t.me/{bu}?startgroup=new"),
+            text="➗ Add Alexy To Your Group ➗", url=f"t.me/{bu}?startgroup=new"),
     ],
 ]
 
