@@ -65,14 +65,14 @@ def no_longer_afk(update: Update, context: CallbackContext):
         firstname = update.effective_user.first_name
         try:
             options = [
-                "{} Telah Kembali Online!",
-                "{} Telah Kembali!",
-                "{} Telah Kembali untuk Menjelajah Bokp!",
-                "{} Korban Virtual Telah Kembali!",
-                "{} Telah Bangkit Dari Kubur!",
-                "{} Kembali Untuk Menjajah Para Sagapung!",
+                "{} Back Online!",
+                "{} Already returned!",
+                "{} Back to Explore Bokp!",
+                "{} Virtual Victim is Back!",
+                "{} Has Risen From The Grave!",
+                "{} Return To Colonize The Sagapung!",
                 "Welcomek Taik! {}",
-                "Siapa Ini {}?\nOh Cucu Dakjal Telah Kembali!",
+                "Who Is This {}?\nOh Da'jal's Grandson Is Back!",
             ]
             chosen_option = random.choice(options)
             update.effective_message.reply_text(chosen_option.format(firstname))
