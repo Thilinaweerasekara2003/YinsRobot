@@ -229,7 +229,7 @@ def start(update: Update, context: CallbackContext):
             )
     else:
         update.effective_message.reply_text(
-            f"👋 Hi, Saya {dispatcher.bot.first_name}. Senang bertemu dengan Anda.",
+            f"👋 Hi, Saya {dispatcher.bot.first_name}. Nice to meet you.",
             parse_mode=ParseMode.HTML
        )
 
@@ -374,18 +374,18 @@ def yins_about_callback(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="Admins", callback_data="yins_admin"),
-                    InlineKeyboardButton(text="Notes", callback_data="yins_notes"),
+                    InlineKeyboardButton(text="Admins", callback_data="Alexy_admin"),
+                    InlineKeyboardButton(text="Notes", callback_data="Alexy_notes"),
                  ],
                  [
-                    InlineKeyboardButton(text="Support", callback_data="yins_support"),
-                    InlineKeyboardButton(text="Credits", callback_data="yins_credit"),
+                    InlineKeyboardButton(text="Support", callback_data="HiTechRockets"),
+                    InlineKeyboardButton(text="Credits", callback_data="HiTechRocket"),
                  ],
                  [
-                    InlineKeyboardButton(text="Source Code", url="https://github.com/AyiinXd/YinsRobot"),
+                    InlineKeyboardButton(text="Source Code", url="https://github.com/Thilinaweerasekara2003/YinsRobot"),
                  ],
                  [
-                    InlineKeyboardButton(text="Go Back", callback_data="yins_back"),
+                    InlineKeyboardButton(text="Go Back", callback_data="Alexy_back"),
                  ]
                 ]
             ),
@@ -405,7 +405,7 @@ def yins_about_callback(update, context):
                 disable_web_page_preview=False,
         )
 
-    elif query.data == "yins_admin":
+    elif query.data == "Alexy_admin":
         query.message.edit_text(
             text=f"*๏ Let's make your group bit effective now*"
             "\nCongragulations, YinsRobot now ready to manage your group."
@@ -422,7 +422,7 @@ def yins_about_callback(update, context):
             ),
         )
 
-    elif query.data == "yins_notes":
+    elif query.data == "Alexy_notes":
         query.message.edit_text(
             text=f"<b>๏ Setting up notes</b>"
             f"\nYou can save message/media/audio or anything as notes"
@@ -433,10 +433,10 @@ def yins_about_callback(update, context):
                 [[InlineKeyboardButton(text="Go Back", callback_data="yins_")]]
             ),
         )
-    elif query.data == "yins_support":
+    elif query.data == "Alexy_support":
         query.message.edit_text(
             text="*๏ Yins support chats*"
-            "\nJoin My Support Group/Channel for see or report a problem on Yins.",
+            "\nJoin My Support Group/Channel for see or report a problem on Alexy.",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
@@ -453,25 +453,21 @@ def yins_about_callback(update, context):
         )
 
 
-    elif query.data == "yins_credit":
+    elif query.data == "Alexy_credit":
         query.message.edit_text(
-            text=f"๏ Credis for Yins\n"
-            "\nHere Developers Making And Give Inspiration For Made The YinsRobot",
+            text=f"๏ Credis for Alexy\n"
+            "\nHere Developers Making And Give Inspiration For Made The Alexy_Robot",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="AyiinXd", url="https://github.com/AyiinXd"),
-                    InlineKeyboardButton(text="Ayiin-Userbot", url="https://github.com/AyiinXd/Ayiin-Userbot"),
+                    InlineKeyboardButton(text="ThilinaWeerasekara", url="https://github.com/Thilinaweerasekara2003"),  
                  ],
                  [
-                    InlineKeyboardButton(text="AyiinMusic", url="https://github.com/AyiinXd/AyiinMusic"),
-                    InlineKeyboardButton(text="YinsRobot", url="https://github.com/AyiinXd/YinsRobot"),
+                    InlineKeyboardButton(text="AlexyMusic", url="t.me/HiTechRockets"),
+                    InlineKeyboardButton(text="YinsRobot", url="https://github.com/Thilinaweerasekara2003/Alexy"),
                  ],
-                 [
-                    InlineKeyboardButton(text="Anime Kaizoku", url="https://github.com/animekaizoku"),
-                    InlineKeyboardButton(text="TheGhost Hunter", url="https://github.com/HuntingBots"),
-                 ],
+                
                  [
                     InlineKeyboardButton(text="Inuka Asith", url="https://github.com/inukaasith"),
                     InlineKeyboardButton(text="Noob-Kittu", url="https://github.com/noob-kittu"),
@@ -749,7 +745,7 @@ def donate(update: Update, context: CallbackContext):
             DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
         )
 
-        if OWNER_ID != 1606221784:
+        if OWNER_ID != :1606221784
             update.effective_message.reply_text(
                 "I'm free for everyone ❤️ If you wanna make me smile, just join"
                 "[My Channel]({})".format(DONATION_LINK),
@@ -798,7 +794,7 @@ def main():
         try:
             dispatcher.bot.sendMessage(
                 f"@{SUPPORT_CHAT}", 
-                "✨ Hai, YinzRobot Berhasil Diaktifkan",
+                "✨ Hi, AlexyRobot Activated Successfully",
                 parse_mode=ParseMode.MARKDOWN
             )
         except Unauthorized:
