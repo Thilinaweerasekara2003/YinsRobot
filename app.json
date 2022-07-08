@@ -1,5 +1,5 @@
 {
-      "name": "Yins Robot",
+      "name": "Alexy Robot",
       "description": "A Powerful  Telegram group management bot with anime theme.",
       "keywords": [
          "telegram",
@@ -9,7 +9,7 @@
          "yinsrobot"
       ],
     
-   "logo":    "https://telegra.ph/file/64f4b1e3ab6d6911447d2.jpg",  
+   "logo":    "https://telegra.ph/file/ef22a55cd1cd6f039a80e.jpg",  
    "repository": "https://github.com/AyiinXd/YinsRobot",
    "addons": [
           {
@@ -64,7 +64,7 @@
       },
       "BOT_USERNAME": {
          "description": "username of your bot without the @",
-         "value": "YinzRobot"
+         "value": "Alexy_Robot"
       },
 
       "BOT_ID": {
@@ -74,12 +74,12 @@
 
       "OWNER_USERNAME": {
          "description": "Your username without the @",
-         "value": "AyiinXd"
+         "value": "DarkRider2003"
       },
       "SUPPORT_CHAT": {
          "description": "Your Telegram support group chat username where your users will go and bother you with shit But be like: MyGroupChatUsernameBlah. If this ever points to masha support than consider you made an enemy.",
          "required": true,
-         "value": "AyiinXdSupport"
+         "value": "HitechRockets"
       },
       "MONGO_DB_URI": {
          "description": "Required for database connections.",
