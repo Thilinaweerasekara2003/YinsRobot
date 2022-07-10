@@ -229,7 +229,7 @@ def start(update: Update, context: CallbackContext):
             )
     else:
         update.effective_message.reply_text(
-            f"👋 Hi, Saya {dispatcher.bot.first_name}. Nice to meet you.",
+            f"👋 Hi, I am {dispatcher.bot.first_name}. Nice to meet you.",
             parse_mode=ParseMode.HTML
        )
 
@@ -360,7 +360,7 @@ def yins_about_callback(update, context):
     query = update.callback_query
     if query.data == "yins_":
         query.message.edit_text(
-            text="๏ I'm *Yins*, a powerful group management bot built to help you manage your group easily."
+            text="๏ I'm *Alexy*, a powerful group management bot built to help you manage your group easily."
             "\n• I can restrict users."
             "\n• I can greet users with customizable welcome messages and even set a group's rules."
             "\n• I have an advanced anti-flood system."
@@ -368,7 +368,7 @@ def yins_about_callback(update, context):
             "\n• I have a note keeping system, blacklists, and even predetermined replies on certain keywords."
             "\n• I check for admins' permissions before executing any command and more stuffs"
             "\n\n_Yin's licensed under the GNU General Public License v3.0_"
-            "\n\n Click on button bellow to get basic help for YinsRobot.",
+            "\n\n Click on button bellow to get basic help for AlexyRobot.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -408,7 +408,7 @@ def yins_about_callback(update, context):
     elif query.data == "Alexy_admin":
         query.message.edit_text(
             text=f"*๏ Let's make your group bit effective now*"
-            "\nCongragulations, YinsRobot now ready to manage your group."
+            "\nCongragulations, AlexyRobot now ready to manage your group."
             "\n\n*Admin Tools*"
             "\nBasic Admin tools help you to protect and powerup your group."
             "\nYou can ban members, Kick members, Promote someone as admin through commands of bot."
@@ -441,8 +441,8 @@ def yins_about_callback(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="Support", url="t.me/AyiinXdSupport"),
-                    InlineKeyboardButton(text="Updates", url="https://t.me/AyiinSupport"),
+                    InlineKeyboardButton(text="Support", url="https://t.me/HiTechRockets"),
+                    InlineKeyboardButton(text="Updates", url="https://t.me/HiTechRocket"),
                  ],
                  [
                     InlineKeyboardButton(text="Go Back", callback_data="yins_"),
@@ -465,7 +465,7 @@ def yins_about_callback(update, context):
                  ],
                  [
                     InlineKeyboardButton(text="AlexyMusic", url="t.me/HiTechRockets"),
-                    InlineKeyboardButton(text="YinsRobot", url="https://github.com/Thilinaweerasekara2003/Alexy"),
+                    InlineKeyboardButton(text="AlexyRobot", url="https://github.com/Thilinaweerasekara2003/Alexy"),
                  ],
                 
                  [
