@@ -278,7 +278,7 @@ def save(update: Update, context: CallbackContext):
     )
 
     msg.reply_text(
-        f"Ya! Ditambahkan `{note_name}`.\nDapatkan itu dengan /get `{note_name}`",
+        f"Yes! Added `{note_name}`.\nGet it with /get `{note_name}`",
         parse_mode=ParseMode.MARKDOWN,
     )
 
@@ -309,7 +309,7 @@ def clear(update: Update, context: CallbackContext):
         notename = args[0].lower()
 
         if sql.rm_note(chat_id, notename):
-            update.effective_message.reply_text("Berhasil menghapus catatan.")
+            update.effective_message.reply_text("Successfully deleted record.")
         else:
             update.effective_message.reply_text("That's not a note in my database!")
 
@@ -320,7 +320,7 @@ def clearall(update: Update, context: CallbackContext):
     member = chat.get_member(user.id)
     if member.status != "creator" and user.id not in DRAGONS:
         update.effective_message.reply_text(
-            "Hanya pemilik obrolan yang dapat menghapus semua catatan sekaligus.",
+            "Only chat owner can delete all notes at once.",
         )
     else:
         buttons = InlineKeyboardMarkup(
@@ -335,7 +335,7 @@ def clearall(update: Update, context: CallbackContext):
             ],
         )
         update.effective_message.reply_text(
-            f"Apakah Anda yakin ingin menghapus semua catatan di {chat.title}? Tindakan ini tidak bisa dibatalkan.",
+            f"Are you sure you want to delete all records in {chat.title}? This action cannot be undone.",
             reply_markup=buttons,
             parse_mode=ParseMode.MARKDOWN,
         )
@@ -353,12 +353,12 @@ def clearall_btn(update: Update, context: CallbackContext):
                 for notename in note_list:
                     note = notename.name.lower()
                     sql.rm_note(chat.id, note)
-                message.edit_text("Menghapus semua catatan.")
+                message.edit_text("Delete all records.")
             except BadRequest:
                 return
 
         if member.status == "administrator":
-            query.answer("Hanya pemilik obrolan yang dapat melakukan ini.")
+            query.answer("Only chat owners can do this.")
 
         if member.status == "member":
             query.answer("You need to be admin to do this.")
@@ -367,9 +367,9 @@ def clearall_btn(update: Update, context: CallbackContext):
             message.edit_text("Menghapus semua catatan telah dibatalkan.")
             return
         if member.status == "administrator":
-            query.answer("Hanya pemilik obrolan yang dapat melakukan ini.")
+            query.answer("Only chat owners can do this.")
         if member.status == "member":
-            query.answer("Anda harus menjadi admin untuk melakukan ini.")
+            query.answer(You must be an admin to do this".")
 
 
 @connection_status
@@ -387,13 +387,13 @@ def list_notes(update: Update, context: CallbackContext):
             update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
             msg = ""
         msg += note_name
-        masyins = msg + "\n\n⪼ **Gunakan** `/get notename` **untuk mendapatkan catatan**"
+        masyins = msg + "\n\n⪼ **Use** `/get notename` **to get notes**"
 
     if not note_list:
         try:
-            update.effective_message.reply_text("Tidak ada catatan dalam obrolan ini!")
+            update.effective_message.reply_text("There are no records in this chat!")
         except BadRequest:
-            update.effective_message.reply_text("Tidak ada catatan dalam obrolan ini!", quote=False)
+            update.effective_message.reply_text("There are no records in this chat!", quote=False)
 
     elif len(msg) != 0:
         update.effective_message.reply_text(masyins, parse_mode=ParseMode.MARKDOWN)
