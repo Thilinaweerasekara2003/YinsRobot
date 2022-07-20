@@ -369,7 +369,7 @@ def clearall_btn(update: Update, context: CallbackContext):
         if member.status == "administrator":
             query.answer("Only chat owners can do this.")
         if member.status == "member":
-            query.answer("You must be an admin to do this".")
+            query.answer("You must be an admin to do this")
 
 
 @connection_status
