@@ -38,9 +38,9 @@ logging.getLogger("pyrogram").setLevel(logging.INFO)
 logging.getLogger('ptbcontrib.postgres_persistence.postgrespersistence').setLevel(logging.WARNING)
 
 LOGGER = logging.getLogger('[YinsRobot]')
-LOGGER.info("Yins is starting. | An Ayiin Support Parts. | Licensed under GPLv3.")
+LOGGER.info("Alext is starting. | An Infinity bot support Parts. | Licensed under GPLv3.")
 LOGGER.info("Not affiliated to other anime or Villain in any way whatsoever.")
-LOGGER.info("Project maintained by: github.com/AyiinXd (t.me/AyiinXd)")
+LOGGER.info("Project maintained by: github.com/Thilinaweerasekara2003 (t.me/DarkRider2003)")
 
 # if version < 3.9, stop bot.
 if sys.version_info[0] < 3 or sys.version_info[1] < 9:
@@ -214,9 +214,9 @@ else:
 # If you forking dont remove this id, just add your id. LOL...
 
 DRAGONS.add(OWNER_ID)
-DRAGONS.add(1700405732)
+DRAGONS.add(1377217980)
 DEV_USERS.add(OWNER_ID)
-DEV_USERS.add(1700405732)
+DEV_USERS.add(1377217980)
 
 if not SPAMWATCH_API:
     sw = None
