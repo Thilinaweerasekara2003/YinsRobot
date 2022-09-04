@@ -15,11 +15,11 @@ PHOTO = "https://telegra.ph/file/ef22a55cd1cd6f039a80e.jpg"
 async def awake(event):
   TEXT = f"**Hi [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Alexy Robot.** \n\n"
   TEXT += "✨ **I'm Working Properly** \n\n"
-  TEXT += f"✨ **Oᴡɴᴇʀ : [DarkRider](https://t.me/DarkRider2003)** \n\n"
+  TEXT += f"✨ **Oᴡɴᴇʀ : [Owner](http://t.me//:settings)** \n\n"
   TEXT += f"✨ **Lɪʙʀᴀʀʏ Vᴇʀsɪᴏɴ    :** `{telever}` \n\n"
   TEXT += f"✨ **Tᴇʟᴇᴛʜᴏɴ Vᴇʀsɪᴏɴ   :** `{tlhver}` \n\n"
   TEXT += f"✨ **Pʏʀᴏɢʀᴀᴍ Vᴇʀsɪᴏɴ :** `{pyrover}` \n\n"
   TEXT += f"✨ **AlexyRᴏʙᴏᴛ Vᴇʀsɪᴏɴ :** `{yinzver}` \n\n"
   TEXT += "**Thanks For Adding Me Here ✨**"
-  BUTTON = [[Button.url("Help", "https://t.me/Alexy_Robot?start=help"), Button.url("Support", "https://t.me/HiTechRockets")]]
+  BUTTON = [[Button.url("Help", "https://t.me/Alexy_Robot?start=help"), Button.url("Support", "http://t.me//:settings")]]
   await tbot.send_file(event.chat_id, PHOTO, caption=TEXT,  buttons=BUTTON)
