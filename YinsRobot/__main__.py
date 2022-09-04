@@ -113,7 +113,7 @@ Click on the button bellow to get description about specifics command."""
 
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
- You can support the project by contacting @DarkRider2003 \
+ You can support the project by contacting Name \
  Supporting isnt always financial! \
  Those who cannot provide monetary support are welcome to help us develop the bot at ."""
 
@@ -382,7 +382,7 @@ def yins_about_callback(update, context):
                     InlineKeyboardButton(text="Credits", callback_data="HiTechRocket"),
                  ],
                  [
-                    InlineKeyboardButton(text="Source Code", url="https://github.com/Thilinaweerasekara2003/YinsRobot"),
+                    InlineKeyboardButton(text="Source Code", url="Heee"),
                  ],
                  [
                     InlineKeyboardButton(text="Go Back", callback_data="Alexy_back"),
@@ -441,8 +441,8 @@ def yins_about_callback(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="Support", url="https://t.me/HiTechRockets"),
-                    InlineKeyboardButton(text="Updates", url="https://t.me/HiTechRocket"),
+                    InlineKeyboardButton(text="Support", url="Support Ane manda"),
+                    InlineKeyboardButton(text="Updates", url="ehema ekk na bn"),
                  ],
                  [
                     InlineKeyboardButton(text="Go Back", callback_data="yins_"),
