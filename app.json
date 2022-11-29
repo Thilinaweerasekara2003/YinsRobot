@@ -11,6 +11,7 @@
     
    "logo":    "https://telegra.ph/file/ef22a55cd1cd6f039a80e.jpg",  
    "repository": "https://github.com/AyiinXd/YinsRobot",
+   "stack": "heroku-22",
    "addons": [
           {
          "options": {
