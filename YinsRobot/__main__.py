@@ -435,7 +435,7 @@ def yins_about_callback(update, context):
         )
     elif query.data == "Alexy_support":
         query.message.edit_text(
-            text="*๏ Yins support chats*"
+            text="*๏ Alexy support chats*"
             "\nJoin My Support Group/Channel for see or report a problem on Alexy.",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
@@ -465,7 +465,7 @@ def yins_about_callback(update, context):
                  ],
                  [
                     InlineKeyboardButton(text="AlexyMusic", url="t.me/HiTechRockets"),
-                    InlineKeyboardButton(text="AlexyRobot", url="https://github.com/Thilinaweerasekara2003/Alexy"),
+                    InlineKeyboardButton(text="AlexyRobot", url="t.me/Ga;axyLanka"),
                  ],
                 
                  [
