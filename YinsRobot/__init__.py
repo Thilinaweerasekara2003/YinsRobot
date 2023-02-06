@@ -38,7 +38,7 @@ logging.getLogger("pyrogram").setLevel(logging.INFO)
 logging.getLogger('ptbcontrib.postgres_persistence.postgrespersistence').setLevel(logging.WARNING)
 
 LOGGER = logging.getLogger('[YinsRobot]')
-LOGGER.info("Alext is starting. | An Infinity bot support Parts. | Licensed under GPLv3.")
+LOGGER.info("Alexy is starting. | An Infinity bot support Parts. | Licensed under GPLv3.")
 LOGGER.info("Not affiliated to other anime or Villain in any way whatsoever.")
 LOGGER.info("Project maintained by: github.com/Thilinaweerasekara2003 (t.me/DarkRider2003)")
 
